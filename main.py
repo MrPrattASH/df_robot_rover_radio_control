@@ -4,25 +4,22 @@ CW spins forward, CCW rev
 M1 Left
 M2 Right
 '''
+basic.show_icon(IconNames.HEART)
+radio.set_group(30)
 
-radio.set_group(10)
 
 def on_received_value(name, value):
     value = 120
     if name == "fwd":
-        motor.motor_run(motor.Motors.M1, motor.Dir.CW, value)
-        motor.motor_run(motor.Motors.M2, motor.Dir.CW, value)
+        Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.FORWARD, value)
     elif name == "rev":
-        motor.motor_run(motor.Motors.M1, motor.Dir.CCW, value)
-        motor.motor_run(motor.Motors.M2, motor.Dir.CCW, value)
+        Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.REVERSE, value)
     elif name == "left":
-        motor.motor_run(motor.Motors.M1, motor.Dir.CCW, value)
-        motor.motor_run(motor.Motors.M2, motor.Dir.CW, value)
+        Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.LEFT, value)
     elif name == "right":
-        motor.motor_run(motor.Motors.M1, motor.Dir.CW, value)
-        motor.motor_run(motor.Motors.M2, motor.Dir.CCW, value)
-    else:
-        motor.motor_stop_all()
+        Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.RIGHT, value)
+    elif name == "stop":
+        Kitronik_Move_Motor.stop()
 radio.on_received_value(on_received_value)
 
 

@@ -5,23 +5,20 @@ M1 Left
 M2 Right
 
  */
-radio.setGroup(10)
+basic.showIcon(IconNames.Heart)
+radio.setGroup(30)
 radio.onReceivedValue(function on_received_value(name: string, value: number) {
     value = 120
     if (name == "fwd") {
-        motor.MotorRun(motor.Motors.M1, motor.Dir.CW, value)
-        motor.MotorRun(motor.Motors.M2, motor.Dir.CW, value)
+        Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Forward, value)
     } else if (name == "rev") {
-        motor.MotorRun(motor.Motors.M1, motor.Dir.CCW, value)
-        motor.MotorRun(motor.Motors.M2, motor.Dir.CCW, value)
+        Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Reverse, value)
     } else if (name == "left") {
-        motor.MotorRun(motor.Motors.M1, motor.Dir.CCW, value)
-        motor.MotorRun(motor.Motors.M2, motor.Dir.CW, value)
+        Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Left, value)
     } else if (name == "right") {
-        motor.MotorRun(motor.Motors.M1, motor.Dir.CW, value)
-        motor.MotorRun(motor.Motors.M2, motor.Dir.CCW, value)
-    } else {
-        motor.motorStopAll()
+        Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Right, value)
+    } else if (name == "stop") {
+        Kitronik_Move_Motor.stop()
     }
     
 })
